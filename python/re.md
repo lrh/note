@@ -11,7 +11,7 @@ pat=re.compile('A')
 m=pat.search('CBA')                    #等价于 re.search('A','CBA')
 print m
 <_sre.SRE_Match object at 0x9d690c8>   #匹配到了，返回MatchObject（True）
- 
+
 m=pat.search('CBD')
 print m
 None                                   #没有匹配到，返回None（False）
@@ -54,7 +54,7 @@ printpat.match('aASD')
 ```Python
 if pat.search('asd'):
 ...     print 'OK'
-... 
+...
 OK        #找到返回
 if re.search('a','ASD'):
 ...     print "OK"
@@ -65,17 +65,17 @@ if re.search('a','ASD'):
 ```Python
 re.split(',','a,s,d,asd')
 ['a', 's', 'd', 'asd']          #返回列表
- 
+
 pat = re.compile(',')
 pat.split('a,s,d,asd')
 ['a', 's', 'd', 'asd']          #返回列表
- 
+
 re.split('[, ]+','a ,  s  ,d     ,,,,,asd')   #正则匹配：[, ]+，后面说明
 ['a', 's', 'd', 'asd']
- 
+
 re.split('[, ]+','a ,  s  ,d     ,,,,,asd',maxsplit=2) # maxsplit 最多分割次数
 ['a', 's', 'd     ,,,,,asd']
- 
+
 pat = re.compile('[, ]+')                     #正则匹配：[, ]+，后面说明
 pat.split('a ,  s  ,d     ,,,,,asd',maxsplit=2)        # maxsplit 最多分割次数
 ['a', 's', 'd     ,,,,,asd']
@@ -84,24 +84,24 @@ pat.split('a ,  s  ,d     ,,,,,asd',maxsplit=2)        # maxsplit 最多分割�
 * findall(pattern,string)：列表形式返回匹配项
 
 ```Python
-re.findall('a','ASDaDFGAa') 
+re.findall('a','ASDaDFGAa')
 ['a', 'a']                           #列表形式返回匹配到的字符串
- 
+
 pat = re.compile('a')
 pat.findall('ASDaDFGAa')
 ['a', 'a']                           #列表形式返回匹配到的字符串
- 
+
 pat = re.compile('[A-Z]+')       #正则匹配：'[A-Z]+' 后面有说明
 pat.findall('ASDcDFGAa')
 ['ASD', 'DFGA']                      #找到匹配到的字符串
- 
+
 pat = re.compile('[A-Z]')
 pat.findall('ASDcDFGAa')         #正则匹配：'[A-Z]+' 后面有说明
 ['A', 'S', 'D', 'D', 'F', 'G', 'A']  #找到匹配到的字符串
- 
+
 pat = re.compile('[A-Za-z]')     #正则匹配：'[A-Za-z]+' 匹配所有单词，后面有说明
 pat.findall('ASDcDFGAa')
-['A', 'S', 'D', 'c', 'D', 'F', 'G', 'A', 'a'] 
+['A', 'S', 'D', 'c', 'D', 'F', 'G', 'A', 'a']
 ```
 
 * sub(pat,repl,string) ：用repl替换 pat匹配项
@@ -111,41 +111,41 @@ pat.findall('ASDcDFGAa')
 ```Python
  re.sub('a','A','abcasd')   #找到a用A替换，后面见和group的配合使用
 'AbcAsd'
- 
+
 pat = re.compile('a')
 pat.sub('A','abcasd')
 'AbcAsd'
- 
+
  pat=re.compile(r'www\.(.*)\..{3}') #正则表达式
- 
+
   #在Python的string前面加上‘r’， 是为了告诉编译器这个string是个raw string，不要转译反斜杠 '\' 。
   #例如，\n 在raw string中，是两个字符，\和n， 而不会转译为换行符。
   #由于正则表达式和 \ 会有冲突，因此，当一个字符串使用了正则表达式后，最好在前面加上'r'。
-    
+
    #与大多数编程语言相同，正则表达式里使用"\"作为转义字符，这就可能造成反斜杠困扰。
    #假如你需要匹配文本中的字符"\"，那么使用编程语言表示的正则表达式里将需要4个反斜杠"\\\\"：
    #前两个和后两个分别用于在编程语言里转义成反斜杠，转换成两个反斜杠后再在正则表达式里转义成一个反斜杠。
    #Python里的原生字符串很好地解决了这个问题，这个例子中的正则表达式可以使用r"\\"表示。
    #同样，匹配一个数字的"\\d"可以写成r"\d"。
    #有了原生字符串，你再也不用担心是不是漏写了反斜杠，写出来的表达式也更直观。
-   
+
    #不是说 加了r \就没有转译功能，好乱，就直接记住1句话：
    #当一个字符串使用了正则表达式后，最好在前面加上'r'，这样你再也不用担心是不是漏写了反斜杠，写出来的表达式也更直观
- 
+
 pat.match('www.dxy.com').group(1)
 'dxy'
- 
+
 re.sub(r'www\.(.*)\..{3}',r'\1','hello,www.dxy.com')
- 
-pat.sub(r'\1','hello,www.dxy.com') 
+
+pat.sub(r'\1','hello,www.dxy.com')
 'hello,dxy'
 # r'1' 是第一组的意思
 #通过正则匹配找到符合规则的"www.dxy.com" ，取得 组1字符串 去替换 整个匹配。
- 
- 
+
+
  pat=re.compile(r'(\w+) (\w+)')     #正则表达式
 s='hello world ! hello hz !'
- 
+
 pat.findall('hello world ! hello hz !')
 [('hello', 'world'), ('hello', 'hz')]
 pat.sub(r'\2 \1',s)                #通过正则得到组1(hello)，组2(world)，再通过sub去替换。即组1替换组2，组2替换组1，调换位置。  
@@ -167,12 +167,12 @@ re.escape('www.dxy.cn')
 ```Python
 pat = re.compile(r'www\.(.*)\.(.*)')       #用()表示1个组，2个组
 m = pat.match('www.dxy.com')
-m.group()                                  #默认为0，表示匹配整个字符串   
+m.group()                                  #默认为0，表示匹配整个字符串
 'www.dxy.com'
- 
+
 m.group(1)                                 #返回给定组1匹配的子字符串
 'dxy'
- 
+
 m.group(2)
 'com'
 ```
@@ -206,7 +206,7 @@ pat.match('abc')
 <_sre.SRE_Match object at 0xb72b6170>
 pat.match('abc').group()
 'a'                                #匹配到了首个字符
-pat.search('abc').group() 
+pat.search('abc').group()
 'a'
 pat.match('\n').group()        #换行符匹配出错
 Traceback (most recent call last):
@@ -236,15 +236,15 @@ pat.search('abc.efg').group()  #匹配到.
 
 * “\d” : 数字
 ```Python
->>> pat=re.compile('\d')           
+>>> pat=re.compile('\d')
 >>> pat.search('ax1by2cz3').group()   #匹配到第一个数字:1，返回
 '1'
- 
+
 >>> pat.match('ax1by2cz3').group()    #匹配不到（首个不是）返回None，报错，match匹配字符串头
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 AttributeError: 'NoneType' object has no attribute 'group'
- 
+
 >>> pat.findall('ax1by2cz3')          #匹配所有的数字，列表返回
 ['1', '2', '3']
 ```
@@ -300,13 +300,13 @@ AttributeError: 'NoneType' object has no attribute 'group'
 '\xe6'
 ```
 
-###数量词
+### 数量词
 
 * “*” ：0次或多次
 （ 乘0会变成0）
 ```Python
 >>> pat = re.compile('[abc]*')
->>> pat.match('abcabcdefabc').group() 
+>>> pat.match('abcabcdefabc').group()
 'abcabc'                              #2次
 >>> pat.search('abcabcdefabc').group()
 'abcabc'                              #2次
@@ -352,7 +352,7 @@ AttributeError: 'NoneType' object has no attribute 'group'
 'bbabc'
 >>> pat.findall('abcdefabcabc')
 ['abc', 'abcabc']
- 
+
 >>> pat = re.compile('[abc]+?')        #非贪婪模式：+?
 >>> pat.match('abcdefabcabc').group()  #匹配尽可能少的：a、b、c
 'a'
@@ -388,18 +388,18 @@ AttributeError: 'NoneType' object has no attribute 'group'
 * “^” ：匹配字符串开头或行头
 ```Python
 >>> pat = re.compile('^[abc]')     #开头是a、b、c中的任意一个
->>> pat.search('defabc').group()     
+>>> pat.search('defabc').group()
 >>> pat.match('defabc').group()    #均找不到
 >>> pat.findall('defabc')
 []
- 
+
 >>> pat.search('adefabc').group()
 'a'
 >>> pat.match('adefabc').group()   #开头是a、b、c中的任意一个
 'a'
 >>> pat.findall('adefabc')
 ['a']
- 
+
 >>> pat = re.compile('^[abc]+')    #开头是a、b、c中的任意一个的一次或则多次，贪婪：匹配多个
 >>> pat.findall('cbadefab')
 ['cba']
@@ -414,7 +414,7 @@ AttributeError: 'NoneType' object has no attribute 'group'
 >>> pat.match('adefAbc').group()   #match匹配的是字符串开头，所以查找$的时，总是返回None
 >>> pat.search('adefAbc').group()  #结尾是a、b、c中的任意一个
 'c'
->>> pat.findall('adefAbc')         
+>>> pat.findall('adefAbc')
 ['c']
 >>> pat = re.compile('[abc]+$')
 >>> pat.search('adefAbc').group()  #结尾是a、b、c中的任意一个的一次或则多次，贪婪：匹配多个
@@ -449,8 +449,8 @@ AttributeError: 'NoneType' object has no attribute 'group'
 >>> pat=re.compile(r'(a)\w(c)')  #\w:单个的数字或字母 [A-Za-z0-9]
 >>> pat.match('abcdef').group()
 'abc'
->>> pat=re.compile('(a)b(c)')    #分2组，匿名分组 
-                                 
+>>> pat=re.compile('(a)b(c)')    #分2组，匿名分组
+
 >>> pat.match('abcdef').group()  #默认返回匹配的字符串
 'abc'
 >>> pat.match('abcdef').group(1) #取分组1，适用于search
@@ -461,14 +461,14 @@ AttributeError: 'NoneType' object has no attribute 'group'
 ('a', 'c')
 ```
 
-* <number>：引用编号为<number>的分组匹配到的字符串
+* number：引用编号为 number 的分组匹配到的字符串
 ```Python
 >>> pat=re.compile(r'www\.(.*)\..{3}')
 >>> pat.match('www.dxy.com').group(1)
 'dxy'
 ```
 
-* “(?P<name>…)” ：在模式里面用()来表示分组（命名分组）,适用于提取目标字符串中的某一些部位。
+* “(?P name …)” ：在模式里面用()来表示分组（命名分组）,适用于提取目标字符串中的某一些部位。
 ```Python
 >>> pat=re.compile(r'(?P<K>a)\w(c)')    #分2组：命名分组+匿名分组
 >>> pat.search('abcdef').groups()       #取所有分组，元组形式返回
@@ -483,14 +483,14 @@ AttributeError: 'NoneType' object has no attribute 'group'
 {'K': 'a'}
 ```
 
-* “(?P=name)”：引用别名为<name>的分组匹配到的串
+* “(?P=name)”：引用别名为 name 的分组匹配到的串
 ```Python
 >>> pat=re.compile(r'(?P<K>a)\w(c)(?P=K)')    #(?P=K)引用分组1的值，就是a
 >>> pat.search('abcdef').group()              #匹配不到，因为完整'a\wca',模式的第4位是a
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 AttributeError: 'NoneType' object has no attribute 'group'
- 
+
 >>> pat.search('abcadef').group()             #匹配到，模式的第4位和组1一样,值是c
 'abca'
 >>> pat.search('abcadef').groups()
@@ -501,7 +501,7 @@ AttributeError: 'NoneType' object has no attribute 'group'
 'c
 ```
 
-* “<number>” ：引用分组编号匹配：
+* “number” ：引用分组编号匹配：
 ```Python
 >>> pat=re.compile(r'(?P<K>a)\w(c)(?P=K)\2')  #\2引用分组2的值，就是c
 >>> pat.findall('Aabcadef')                   #匹配不到，因为完整'a\wcac',模式的第5位是c
