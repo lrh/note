@@ -1,3 +1,5 @@
 
 # note
 
+* git
+* linux
