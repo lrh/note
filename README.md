@@ -3,3 +3,7 @@
 
 * git
 * linux
+* markdown
+* php
+* python
+
