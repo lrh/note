@@ -10,6 +10,7 @@ linux 系统则是由 cron (crond) 这个系统服务来控制的。Linux 系统
 ```bash
 crontab -l # 列出当前所有定时任务
 crontab -e # 编辑定时任务
+cat /etc/crontab # 查看说明
 ```
 
 ## 一、crond简介
