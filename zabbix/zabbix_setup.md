@@ -1,6 +1,8 @@
 
 # Centos 7安装部署zabbix3.0实战（服务器端）
 
+<https://blog.51cto.com/davewang/1859725>
+
 ## 一、服务器端部署
 
 ### 1、Zabbix 环境准备
