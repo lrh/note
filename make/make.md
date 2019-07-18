@@ -1,6 +1,7 @@
 
 # Makefile教程(待整理)
 
+参考链接<http://www.gnu.org/software/make/manual/make.html#Reading>
 参考链接<https://blog.csdn.net/weixin_38391755/article/details/80380786>
 
 [TOC]
